@@ -21,21 +21,6 @@ def get_setting(key, default=None):
 	return get_settings().get(key, default)
 
 class Test1Command(sublime_plugin.TextCommand):
-	def on_batch_select(self, i):
-		if(i < 0):
-			return
-		names = self.__currentSelectList
-		iarWs = self.__currentWs
-		result, messages = iarWs.buildBatch(names[i])
-
-		# Create new view to display result
-		nview = self.view.window().new_file()
-		self.view.window().focus_view(nview)
-		nview.set_name('MagicBuild result')
-		nview.insert(self.__currentEdit, 0, "\n[%s]\n" % messages)
-		nview.insert(self.__currentEdit, 0, "RESULT - %d\n" % result)
-		nview.set_read_only(True)
-		nview.set_scratch(True)
 
 	def run(self, edit, **args):
 		self.__currentWs = None
@@ -43,6 +28,21 @@ class Test1Command(sublime_plugin.TextCommand):
 		self.__currentEdit = edit
 		runFrom = args["mode"]
 
+		def on_batch_select(i):
+			if(i < 0):
+				return
+			names = self.__currentSelectList
+			iarWs = self.__currentWs
+			result, messages = iarWs.buildBatch(names[i])
+
+			# Create new view to display result
+			nview = self.view.window().new_file()
+			self.view.window().focus_view(nview)
+			nview.set_name('MagicBuild result')
+			nview.run_command('insertCharacters "RESULT - %d\n"' % result)
+			#nview.run_command('insertCharacters', {'text': messages})
+			nview.set_read_only(True)
+			nview.set_scratch(True)
 		# Check if run from workspace file
 		if (runFrom == 'context') or (runFrom == 'key'):
 			# Check if the current file is workspace file
@@ -60,7 +60,7 @@ class Test1Command(sublime_plugin.TextCommand):
 			# select what to build
 			names = list(iarWs.batches.keys())
 			self.__currentSelectList = names
-			self.view.window().show_quick_panel(names, self.on_batch_select)
+			self.view.window().show_quick_panel(names, on_batch_select)
 
 		elif (runFrom == 'sidebar'):
 			sublime.message_dialog("Run from side bar!!!")
