@@ -1,0 +1,13 @@
+[
+	{
+		"id" : "test1",
+		"caption" : "test1",
+		"command" : "test1",
+		"args": {
+			"mode": "main",
+			"paths": [],
+			"dirs": [],
+			"files": [],
+		}
+	}
+]

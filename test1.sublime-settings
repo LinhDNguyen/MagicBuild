@@ -1,0 +1,13 @@
+// Place your settings in the file "User/CTags.sublime-settings", which
+// overrides the settings in here.
+{
+    // Enable debugging
+    "debug": false,
+
+    // list supported compilers
+    "compilers": {
+        "iar": "C:\\programfiles\\iar",
+        "uv5": "C:\\programfiles\\uv4",
+        "kds": "C:\\programfiles\\kds",
+    }
+}

@@ -1,0 +1,75 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BatchBuild	.\IARWorkspace.py	/^from test1.MagicBuild.Workspace import Workspace, BatchBuild$/;"	i
+BatchBuild	.\Workspace.py	/^class BatchBuild(object):$/;"	c
+BuildProjects	.\gcc_build_projects.py	/^class BuildProjects(CompilerAbs):$/;"	c
+BuildProjects	.\iar_build_projects.py	/^class BuildProjects:$/;"	c
+BuildProjects	.\keil_build_projects.py	/^class BuildProjects:$/;"	c
+CompilerAbs	.\CompilerAbs.py	/^class CompilerAbs(object):$/;"	c
+CompilerAbs	.\gcc_build_projects.py	/^from CompilerAbs import CompilerAbs$/;"	i
+ET	.\IARWorkspace.py	/^import xml.etree.ElementTree as ET$/;"	i
+IARWorkspace	.\IARWorkspace.py	/^class IARWorkspace(Workspace):$/;"	c
+PROJECTS_FILE	.\gcc_build_projects.py	/^PROJECTS_FILE = "gcc_projects_to_build.txt"$/;"	v
+PROJECTS_FILE	.\iar_build_projects.py	/^PROJECTS_FILE = "iar_projects_to_build.txt"$/;"	v
+PROJECTS_FILE	.\keil_build_projects.py	/^PROJECTS_FILE = "keil_projects_to_build.txt"$/;"	v
+Project	.\IARWorkspace.py	/^from test1.MagicBuild.Project import Project$/;"	i
+Project	.\Project.py	/^class Project(object):$/;"	c
+SECTION_LINE	.\gcc_build_projects.py	/^SECTION_LINE = "*" * 79$/;"	v
+SECTION_LINE	.\iar_build_projects.py	/^SECTION_LINE = "*" * 79$/;"	v
+SECTION_LINE	.\keil_build_projects.py	/^SECTION_LINE = "*" * 79$/;"	v
+Workspace	.\IARWorkspace.py	/^from test1.MagicBuild.Workspace import Workspace, BatchBuild$/;"	i
+Workspace	.\Workspace.py	/^class Workspace(object):$/;"	c
+__init__	.\CompilerAbs.py	/^	def __init__(self, id, path, target, options, **args):$/;"	m	class:CompilerAbs
+__init__	.\IARWorkspace.py	/^    def __init__(self, path):$/;"	m	class:IARWorkspace
+__init__	.\Project.py	/^    def __init__(self, path, configs=[]):$/;"	m	class:Project
+__init__	.\Workspace.py	/^    def __init__(self, name, projects=[]):$/;"	m	class:BatchBuild
+__init__	.\Workspace.py	/^    def __init__(self, path):$/;"	m	class:Workspace
+__init__	.\gcc_build_projects.py	/^    def __init__(self):$/;"	m	class:BuildProjects
+__init__	.\iar_build_projects.py	/^    def __init__(self):$/;"	m	class:BuildProjects
+__init__	.\keil_build_projects.py	/^    def __init__(self):$/;"	m	class:BuildProjects
+_get_error_msg	.\keil_build_projects.py	/^    def _get_error_msg(self, error):$/;"	m	class:BuildProjects
+_read_options	.\gcc_build_projects.py	/^    def _read_options(self):$/;"	m	class:BuildProjects
+_read_options	.\iar_build_projects.py	/^    def _read_options(self):$/;"	m	class:BuildProjects
+_read_options	.\keil_build_projects.py	/^    def _read_options(self):$/;"	m	class:BuildProjects
+argparse	.\iar_build_projects.py	/^import argparse$/;"	i
+argparse	.\keil_build_projects.py	/^import argparse$/;"	i
+build	.\CompilerAbs.py	/^	def build(self):$/;"	m	class:CompilerAbs
+build	.\gcc_build_projects.py	/^    def build(self, projectPath, buildConfig):$/;"	m	class:BuildProjects
+build	.\iar_build_projects.py	/^    def build(self, projectPath, buildConfig):$/;"	m	class:BuildProjects
+build	.\keil_build_projects.py	/^    def build(self, projectPath, buildConfig):$/;"	m	class:BuildProjects
+buildBatch	.\IARWorkspace.py	/^    def buildBatch(self, name):$/;"	m	class:IARWorkspace
+buildBatch	.\Workspace.py	/^    def buildBatch(self, name):$/;"	m	class:Workspace
+buildProject	.\IARWorkspace.py	/^    def buildProject(self, path, config):$/;"	m	class:IARWorkspace
+buildProject	.\Workspace.py	/^    def buildProject(self, path, config):$/;"	m	class:Workspace
+etree	.\IARWorkspace.py	/^import xml.etree.ElementTree as ET$/;"	i
+getBatchNames	.\Workspace.py	/^    def getBatchNames(self):$/;"	m	class:Workspace
+import_projects	.\gcc_build_projects.py	/^    def import_projects(self):$/;"	m	class:BuildProjects
+import_projects	.\iar_build_projects.py	/^    def import_projects(self):$/;"	m	class:BuildProjects
+import_projects	.\keil_build_projects.py	/^    def import_projects(self):$/;"	m	class:BuildProjects
+os	.\IARWorkspace.py	/^import os$/;"	i
+os	.\gcc_build_projects.py	/^import os, sys, subprocess$/;"	i
+os	.\iar_build_projects.py	/^import os, sys, subprocess$/;"	i
+os	.\keil_build_projects.py	/^import os, sys, subprocess$/;"	i
+parse	.\IARWorkspace.py	/^    def parse(self):$/;"	m	class:IARWorkspace
+parse	.\Project.py	/^    def parse(self):$/;"	m	class:Project
+parse	.\Workspace.py	/^    def parse(self):$/;"	m	class:Workspace
+run	.\gcc_build_projects.py	/^    def run(self):$/;"	m	class:BuildProjects
+run	.\iar_build_projects.py	/^    def run(self):$/;"	m	class:BuildProjects
+run	.\keil_build_projects.py	/^    def run(self):$/;"	m	class:BuildProjects
+search_iar	.\iar_build_projects.py	/^    def search_iar(self):$/;"	m	class:BuildProjects
+search_keil	.\keil_build_projects.py	/^    def search_keil(self):$/;"	m	class:BuildProjects
+search_make	.\gcc_build_projects.py	/^    def search_make(self):$/;"	m	class:BuildProjects
+search_projects	.\gcc_build_projects.py	/^    def search_projects(self):$/;"	m	class:BuildProjects
+search_projects	.\iar_build_projects.py	/^    def search_projects(self):$/;"	m	class:BuildProjects
+search_projects	.\keil_build_projects.py	/^    def search_projects(self):$/;"	m	class:BuildProjects
+subprocess	.\gcc_build_projects.py	/^import os, sys, subprocess$/;"	i
+subprocess	.\iar_build_projects.py	/^import os, sys, subprocess$/;"	i
+subprocess	.\keil_build_projects.py	/^import os, sys, subprocess$/;"	i
+sys	.\gcc_build_projects.py	/^import os, sys, subprocess$/;"	i
+sys	.\iar_build_projects.py	/^import os, sys, subprocess$/;"	i
+sys	.\keil_build_projects.py	/^import os, sys, subprocess$/;"	i
+xml	.\IARWorkspace.py	/^import xml.etree.ElementTree as ET$/;"	i
