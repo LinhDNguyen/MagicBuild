@@ -1,13 +1,15 @@
-import xml.etree.ElementTree as ET
 import os
+import xml.etree.ElementTree as ET
+import subprocess
 
 from test1.MagicBuild.Workspace import Workspace, BatchBuild
 from test1.MagicBuild.Project import Project
+from test1.MagicBuild.ProcessUtil import ProcessUtil
 
 class IARWorkspace(Workspace):
     """docstring for IARWorkspace"""
-    def __init__(self, path):
-        super(IARWorkspace, self).__init__(path)
+    def __init__(self, path, toolchainPath = ''):
+        super(IARWorkspace, self).__init__(path, toolchainPath)
 
         self.parse()
 
@@ -19,7 +21,9 @@ class IARWorkspace(Workspace):
 
         # File project list
         for prj in root.findall("./project/path"):
-            self.projects.append(os.path.join(curDir, prj.text))
+            path = prj.text
+            path = path.replace('$WS_DIR$', curDir)
+            self.projects.append(os.path.normpath(os.path.join(curDir, path)))
 
         # Get batch list
         for batchEle in root.findall("./batchBuild/batchDefinition"):
@@ -27,24 +31,43 @@ class IARWorkspace(Workspace):
             name = batchEle.find("./name").text
 
             for prjEle in batchEle.findall("./member"):
-                path = prjEle.find("./project").text
+                pname = prjEle.find("./project").text + ".ewp"
                 config = prjEle.find("./configuration").text
                 configs = []
                 configs.append(config)
-                prj = Project(os.path.join(curDir, path), configs)
+                path = pname
+                for prj in self.projects:
+                    if prj.endswith(pname):
+                        path = prj
+                prj = Project(os.path.normpath(path), configs)
                 projects.append(prj)
             self.batches[name] = projects
 
-    def buildBatch(self, name):
+    def buildBatch(self, name, timeout=100):
         result = True
         messages = ""
         projects = self.batches[name]
         for prj in projects:
-            msg = "=========BUILD PROJECT %s TARGET %s==========" % (prj.path, prj.configs[0])
+            messages += "\n\n=========BUILD PROJECT %s TARGET %s==========\n" % (prj.path, prj.configs[0])
 
-            messages += msg + "\n"
+            prjResult, outStr = self.buildProject(prj.path, prj.configs[0], timeout)
+            if prjResult != 0:
+                result = False
+            messages += str(outStr.decode("windows-1252"))
 
-        return (result, messages,)
+        return (result, messages, )
 
-    def buildProject(self, path, config):
-        pass
+    def buildProject(self, path, config, timeout=100):
+        iarBuildPath = os.path.normpath(os.path.join(self.toolchainPath, "common", "bin", "IarBuild.exe"))
+
+        # Call IarBuild
+        build_cmd = [
+            iarBuildPath,
+            path,
+            '-make', config,
+            '-log', 'all'
+        ]
+        (ret_code, is_timed_out, out_str, err_str) = ProcessUtil.run_job(
+            build_cmd, timeout)
+
+        return (ret_code, out_str, )

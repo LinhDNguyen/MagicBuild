@@ -4,7 +4,7 @@
 		"caption" : "test1",
 		"command" : "test1",
 		"args": {
-			"mode": "sizebar",
+			"mode": "sidebar",
 			"paths": [],
 			"dirs": [],
 			"files": [],

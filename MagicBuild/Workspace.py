@@ -8,9 +8,10 @@ class BatchBuild(object):
 
 class Workspace(object):
     """docstring for Workspace"""
-    def __init__(self, path):
+    def __init__(self, path, toolchainPath = ''):
         super(Workspace, self).__init__()
         self.path = path
+        self.toolchainPath = toolchainPath
         self.batches = {}
         self.projects = []
 

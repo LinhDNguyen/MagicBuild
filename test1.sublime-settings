@@ -6,8 +6,11 @@
 
     // list supported compilers
     "compilers": {
-        "iar": "C:\\programfiles\\iar",
+        "iar": "E:\\ProgramFiles\\IAR7202",
         "uv5": "C:\\programfiles\\uv4",
         "kds": "C:\\programfiles\\kds",
-    }
+    },
+
+    // Default timeout value (second) for each build
+    "build_timeout": 100
 }
