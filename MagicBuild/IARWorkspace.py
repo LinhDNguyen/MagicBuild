@@ -2,9 +2,9 @@ import os
 import xml.etree.ElementTree as ET
 import subprocess
 
-from test1.MagicBuild.Workspace import Workspace, BatchBuild
-from test1.MagicBuild.Project import Project
-from test1.MagicBuild.ProcessUtil import ProcessUtil
+from MagicBuild.MagicBuild.Workspace import Workspace, BatchBuild
+from MagicBuild.MagicBuild.Project import Project
+from MagicBuild.MagicBuild.ProcessUtil import ProcessUtil
 
 class IARWorkspace(Workspace):
     """docstring for IARWorkspace"""
@@ -61,11 +61,15 @@ class IARWorkspace(Workspace):
         iarBuildPath = os.path.normpath(os.path.join(self.toolchainPath, "common", "bin", "IarBuild.exe"))
 
         # Call IarBuild
+        # build_cmd = [
+        #     iarBuildPath,
+        #     path,
+        #     '-make', config,
+        #     '-log', 'all'
+        # ]
         build_cmd = [
-            iarBuildPath,
-            path,
-            '-make', config,
-            '-log', 'all'
+            'TIMEOUT',
+            '10',
         ]
         (ret_code, is_timed_out, out_str, err_str) = ProcessUtil.run_job(
             build_cmd, timeout)

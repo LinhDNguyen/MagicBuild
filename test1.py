@@ -1,7 +1,9 @@
 import os
 import sublime, sublime_plugin
+import subprocess
 
-from test1.MagicBuild.IARWorkspace import IARWorkspace
+from MagicBuild.MagicBuild.IARWorkspace import IARWorkspace
+from MagicBuild.MagicBuild.ProcessUtil import ProcessUtil
 
 def get_settings():
 	"""Load settings.
@@ -94,7 +96,11 @@ class Test1Command(sublime_plugin.TextCommand):
 				sublime.error_message("Please run on a workspace file!!!")
 				return
 			if not fileName.endswith('.eww'):
-				sublime.error_message("Please run on a workspace file!!!")
+				#sublime.error_message("Please run on a workspace file!!!")
+				#return
+				# Create new view to display result
+				
+				sublime.set_timeout_async(self.test_command, 0)
 				return
 
 			# Is workspace file
@@ -135,3 +141,30 @@ class Test1Command(sublime_plugin.TextCommand):
 			self.view.window().show_quick_panel(wsNames, on_workspace_select)
 		else:
 			sublime.message_dialog("Run from Unknow...%s" % str(runFrom))
+
+	def test_command(self):
+		nview = self.view.window().new_file()
+		self.view.window().focus_view(nview)
+		nview.set_name('MagicBuild result')
+		msg = ""
+		nview.run_command("insert", {"characters": "Just a test from Linh\n"})
+		
+		cmd = [
+			'ping',
+			'google.com.vn'
+		]
+
+		out_str = ''
+		try:
+			out_str = subprocess.check_output(cmd, shell=True, env=None, 
+										stderr=subprocess.STDOUT)
+		except Exception as ex:
+			out_str += str(ex)
+		# (ret_code, is_timed_out, out_str, err_str) = ProcessUtil.run_job(
+		# 											cmd, 20)
+		nview.run_command("insert", {"characters": "\n".join(out_str.decode('windows-1252').splitlines())})
+
+		nview.set_read_only(True)
+		nview.set_scratch(True)
+		nview.show(sublime.Region(0, 0))
+
